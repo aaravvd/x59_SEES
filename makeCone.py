@@ -1,50 +1,115 @@
 import math
 
-length = 1.0
-halfAngle = math.radians(10)
+# ============================================================
+# Geometry
+# ============================================================
+
+length = 1.0                    # cone length (m)
+halfAngleDeg = 10.0             # half-angle
+halfAngle = math.radians(halfAngleDeg)
+
 radius = length * math.tan(halfAngle)
 
-n = 100
+n = 200                         # number of circumferential divisions
+
+
+# ============================================================
+# Helper functions
+# ============================================================
+
+def normal(v1, v2, v3):
+    ax = v2[0] - v1[0]
+    ay = v2[1] - v1[1]
+    az = v2[2] - v1[2]
+
+    bx = v3[0] - v1[0]
+    by = v3[1] - v1[1]
+    bz = v3[2] - v1[2]
+
+    nx = ay*bz - az*by
+    ny = az*bx - ax*bz
+    nz = ax*by - ay*bx
+
+    mag = math.sqrt(nx*nx + ny*ny + nz*nz)
+
+    if mag == 0:
+        return (0.0, 0.0, 0.0)
+
+    return (nx/mag, ny/mag, nz/mag)
+
+
+def writeFacet(f, p1, p2, p3):
+    nrm = normal(p1, p2, p3)
+
+    f.write(
+        f"facet normal {nrm[0]:.12e} {nrm[1]:.12e} {nrm[2]:.12e}\n"
+    )
+    f.write("outer loop\n")
+    f.write(f"vertex {p1[0]:.12e} {p1[1]:.12e} {p1[2]:.12e}\n")
+    f.write(f"vertex {p2[0]:.12e} {p2[1]:.12e} {p2[2]:.12e}\n")
+    f.write(f"vertex {p3[0]:.12e} {p3[1]:.12e} {p3[2]:.12e}\n")
+    f.write("endloop\n")
+    f.write("endfacet\n")
+
+
+# ============================================================
+# Generate vertices
+# ============================================================
+
+tip = (0.0, 0.0, 0.0)
+baseCenter = (length, 0.0, 0.0)
+
+circle = []
+
+for i in range(n):
+    theta = 2.0 * math.pi * i / n
+
+    y = radius * math.cos(theta)
+    z = radius * math.sin(theta)
+
+    circle.append((length, y, z))
+
+
+# ============================================================
+# Write STL
+# ============================================================
 
 with open("cone.stl", "w") as f:
+
     f.write("solid cone\n")
 
-    # Base
+    # --------------------------------------------------------
+    # Side surface
+    #
+    # Ordering chosen so normals point outward.
+    # --------------------------------------------------------
+
     for i in range(n):
-        a1 = 2*math.pi*i/n
-        a2 = 2*math.pi*(i+1)/n
 
-        x1 = radius*math.cos(a1)
-        y1 = radius*math.sin(a1)
+        p1 = tip
+        p2 = circle[(i + 1) % n]
+        p3 = circle[i]
 
-        x2 = radius*math.cos(a2)
-        y2 = radius*math.sin(a2)
+        writeFacet(f, p1, p2, p3)
 
-        f.write("facet normal 0 0 -1\n")
-        f.write("outer loop\n")
-        f.write(f"vertex 0 0 {length}\n")
-        f.write(f"vertex {x2} {y2} 0\n")
-        f.write(f"vertex {x1} {y1} 0\n")
-        f.write("endloop\n")
-        f.write("endfacet\n")
+    # --------------------------------------------------------
+    # Base disk
+    #
+    # Viewed from downstream (+x), normal points +x.
+    # --------------------------------------------------------
 
-    # Side
     for i in range(n):
-        a1 = 2*math.pi*i/n
-        a2 = 2*math.pi*(i+1)/n
 
-        x1 = radius*math.cos(a1)
-        y1 = radius*math.sin(a1)
+        p1 = baseCenter
+        p2 = circle[i]
+        p3 = circle[(i + 1) % n]
 
-        x2 = radius*math.cos(a2)
-        y2 = radius*math.sin(a2)
-
-        f.write("facet normal 0 0 0\n")
-        f.write("outer loop\n")
-        f.write("vertex 0 0 0\n")
-        f.write(f"vertex {x1} {y1} {length}\n")
-        f.write(f"vertex {x2} {y2} {length}\n")
-        f.write("endloop\n")
-        f.write("endfacet\n")
+        writeFacet(f, p1, p2, p3)
 
     f.write("endsolid cone\n")
+
+print("Generated cone.stl")
+print(f"Length      : {length}")
+print(f"Half-angle  : {halfAngleDeg} deg")
+print(f"Base radius : {radius:.6f} m")
+print(f"Triangles   : {2*n}")
