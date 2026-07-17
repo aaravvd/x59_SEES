@@ -1,0 +1,22 @@
+case=/Users/tomding/Documents/SEES26/mesh_projs/C608_M14_CFD_baseline_1s
+variant=baseline_0deg_deconflicted
+baseline_geometry=/Users/tomding/Documents/SEES26/C608_canard_pipeline/C608_baseline_00_deconflicted/combined_repaired.stl
+baseline_caveat=tiny +0.001 inch canard z deconfliction, not Boolean-fused CAD
+openfoam=Using: OpenFOAM-v2506 (2506) - visit www.openfoam.com
+mpi=mpirun (Open MPI) 4.1.2
+start_utc=2026-06-28T02:15:14Z
+decompose_status=0
+solver_status=0
+end_utc=2026-06-28T02:21:14Z
+real 358.32
+user 2828.70
+sys 9.49
+
+# latest metadata
+/Users/tomding/Documents/SEES26/mesh_projs/C608_M14_CFD_baseline_1s/processor0/0
+/Users/tomding/Documents/SEES26/mesh_projs/C608_M14_CFD_baseline_1s/processor0/0.1
+/Users/tomding/Documents/SEES26/mesh_projs/C608_M14_CFD_baseline_1s/processor0/0.02
+/Users/tomding/Documents/SEES26/mesh_projs/C608_M14_CFD_baseline_1s/processor0/0.04
+/Users/tomding/Documents/SEES26/mesh_projs/C608_M14_CFD_baseline_1s/processor0/0.06
+/Users/tomding/Documents/SEES26/mesh_projs/C608_M14_CFD_baseline_1s/processor0/0.08
+reconstruct_0p1s_status=0

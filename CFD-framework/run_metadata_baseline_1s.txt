@@ -1,0 +1,24 @@
+case=/Users/tomding/Documents/SEES26/mesh_projs/C608_M14_CFD_baseline_1s
+variant=baseline_0deg_deconflicted
+start_from=latestTime_from_parallel_0p1s
+baseline_caveat=tiny +0.001 inch canard z deconfliction, not Boolean-fused CAD
+openfoam=Using: OpenFOAM-v2506 (2506) - visit www.openfoam.com
+mpi=mpirun (Open MPI) 4.1.2
+start_utc=2026-06-28T02:22:01Z
+controlDict_endTime=1.0
+controlDict_writeInterval=0.05
+controlDict_purgeWrite=10
+controlDict_maxCo=0.25
+controlDict_maxDeltaT=1.6e-5
+solver_status=0
+end_utc=2026-06-28T03:16:22Z
+real 3261.08
+user 25933.08
+sys 73.79
+baseline_reconstruct_start=2026-06-28 11:18:29 CST
+baseline_reconstruct_status=0
+fieldMinMax_p_status=0
+fieldMinMax_U_status=0
+fieldMinMax_T_status=0
+fieldMinMax_Ma_status=0
+baseline_reconstruct_end=2026-06-28 11:18:32 CST

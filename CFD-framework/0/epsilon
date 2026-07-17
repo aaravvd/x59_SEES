@@ -1,0 +1,24 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      epsilon;
+}
+
+epsilonInf      0.00137;
+
+dimensions      [0 2 -3 0 0 0 0];
+
+internalField   uniform $epsilonInf;
+
+boundaryField
+{
+    inlet       { type fixedValue; value uniform $epsilonInf; }
+    outlet      { type zeroGradient; }
+    symmetry    { type symmetryPlane; }
+    farSide     { type fixedValue; value uniform $epsilonInf; }
+    bottom      { type fixedValue; value uniform $epsilonInf; }
+    top         { type fixedValue; value uniform $epsilonInf; }
+    c608         { type epsilonWallFunction; value uniform $epsilonInf; }
+}
