@@ -1,6 +1,6 @@
 # C608/X-59 Sonic Boom Analysis Pipeline
 
-A comprehensive framework for quantifying the relationship between angle of attack (AoA) and ground-PLdB for NASA's Quiet Supersonic Technology (QueSST) demonstrator aircraft.
+A comprehensive framework for quantifying the relationship between angle of attack (AoA) and ground-PLdB for NASA's Quiet Supersonic Technology (QueSST) demonstrator aircraft. This project was commenced under the NASA Stem Engagement in Earth Sciences High School Internship program, and is in current development. 
 
 ## Overview
 
