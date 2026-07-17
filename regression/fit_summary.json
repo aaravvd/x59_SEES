@@ -1,0 +1,125 @@
+{
+  "source": {
+    "input_path": "/Users/aaravdixit/Downloads/complete_aoa_beta_sweep.csv",
+    "input_sha256": "a778b4117b29a5fb4def12cd55e6a6111aa00ab4a2927e9459043a04a8847fc8",
+    "input_row_count": 101,
+    "rows_used": 101,
+    "strict_mesh_only": false,
+    "predictor_range": [
+      0.0,
+      5.0
+    ],
+    "mesh_quality_counts": {
+      "strict_mesh_ok": 52,
+      "accepted_limited_boundary_skewness": 49
+    },
+    "run_family_counts": {
+      "baseline_t5": 87,
+      "relaxed_skew_recovery_t1_sample_t0p8": 8,
+      "relaxed_skew_recovery_t0p8": 4,
+      "endpoint_recovery_t1_sample_t0p8": 2
+    },
+    "solve_end_time_s_counts": {
+      "5.0": 87,
+      "1.0": 10,
+      "0.8": 4
+    },
+    "analysis_time_s_counts": {
+      "missing": 87,
+      "0.8": 14
+    },
+    "mixed_run_family_or_time_provenance": true
+  },
+  "modeling_scope": {
+    "predictor_column": "aoa_deg",
+    "predictor_unit": "deg",
+    "response_column": "incident_pldb",
+    "response_unit": "PLdB",
+    "interpolation_only": true
+  },
+  "selection_method": {
+    "score": "mean(leave-one-out RMSE, rolling contiguous-triplet RMSE)",
+    "spline_replacement_threshold": 0.05,
+    "best_polynomial": {
+      "label": "polynomial_degree_9",
+      "family": "polynomial",
+      "polynomial_degree": 9,
+      "smoothing_lambda_standardized": null,
+      "selection_score_rmse": 0.8226655406750127,
+      "training": {
+        "rmse": 0.6893168376812794,
+        "mae": 0.4759330488618719,
+        "r2": 0.9644154074984947
+      },
+      "leave_one_out": {
+        "rmse": 0.7459760017351051,
+        "mae": 0.5199523601634329,
+        "r2": 0.9583251605369826
+      },
+      "contiguous_triplet": {
+        "rmse": 0.8993550796149203,
+        "mae": 0.6362929271908326,
+        "r2": 0.9379638478452393
+      }
+    },
+    "best_smoothing_spline": {
+      "label": "cubic_smoothing_spline_lambda_1e-06",
+      "family": "smoothing_spline",
+      "polynomial_degree": null,
+      "smoothing_lambda_standardized": 1e-06,
+      "selection_score_rmse": 0.470958308559935,
+      "training": {
+        "rmse": 0.2621336156854064,
+        "mae": 0.16424994394453285,
+        "r2": 0.9948540014594907
+      },
+      "leave_one_out": {
+        "rmse": 0.40903515533849255,
+        "mae": 0.2582741794907271,
+        "r2": 0.9874701608818239
+      },
+      "contiguous_triplet": {
+        "rmse": 0.5328814617813774,
+        "mae": 0.3224130233712674,
+        "r2": 0.9782207112597499
+      }
+    },
+    "relative_spline_improvement": 0.42752153180804836,
+    "selected_model": {
+      "label": "cubic_smoothing_spline_lambda_1e-06",
+      "family": "smoothing_spline",
+      "polynomial_degree": null,
+      "smoothing_lambda_standardized": 1e-06,
+      "selection_score_rmse": 0.470958308559935,
+      "training": {
+        "rmse": 0.2621336156854064,
+        "mae": 0.16424994394453285,
+        "r2": 0.9948540014594907
+      },
+      "leave_one_out": {
+        "rmse": 0.40903515533849255,
+        "mae": 0.2582741794907271,
+        "r2": 0.9874701608818239
+      },
+      "contiguous_triplet": {
+        "rmse": 0.5328814617813774,
+        "mae": 0.3224130233712674,
+        "r2": 0.9782207112597499
+      }
+    }
+  },
+  "outputs": {
+    "model_comparison": "/Users/aaravdixit/Downloads/aoa_pldb_regression/model_comparison.csv",
+    "observed_predictions": "/Users/aaravdixit/Downloads/aoa_pldb_regression/predictions.csv",
+    "fitted_curve": "/Users/aaravdixit/Downloads/aoa_pldb_regression/fitted_curve.csv",
+    "figure_png": "/Users/aaravdixit/Downloads/aoa_pldb_regression/aoa_pldb_regression.png",
+    "figure_svg": "/Users/aaravdixit/Downloads/aoa_pldb_regression/aoa_pldb_regression.svg",
+    "summary_markdown": "/Users/aaravdixit/Downloads/aoa_pldb_regression/fit_summary.md"
+  },
+  "caveats": [
+    "The fitted curve is restricted to interpolation across the observed AoA range.",
+    "The default response is the NASA-2025 incident PLdB convention and must not be mixed with other PLdB conventions.",
+    "This screening-level CFD/propagation sweep is not external validation of an absolute physical optimum.",
+    "The input combines documented CFD run families and solve/sample times; the regression is a merged-screening-sweep surrogate."
+  ]
+}
